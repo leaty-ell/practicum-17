@@ -35,9 +35,6 @@ def process_word_frequencies(text):
 
 
 def main():
-    """
-    Main function of the program.
-    Gets input from user and displays words sorted by frequency.
-    """
+    """Main function of the program."""
     print("Enter a string with words:")
     input_text = input()
