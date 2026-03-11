@@ -1,6 +1,3 @@
-from collections import Counter
-
-
 def get_freq(text):
     """
     Counts word frequencies and records first occurrence indices.
@@ -9,13 +6,18 @@ def get_freq(text):
         text: input string with words separated by spaces
     
     Returns:
-        tuple: (Counter of frequencies, dict of first occurrences)
+        tuple: (dictionary of frequencies, dictionary of first occurrences)
     """
     words = text.split()
-    freq = Counter(words)
-    
+    freq = {}
     first_occurrence = {}
+    
     for i, word in enumerate(words):
+        if word in freq:
+            freq[word] += 1
+        else:
+            freq[word] = 1
+        
         if word not in first_occurrence:
             first_occurrence[word] = i
     
@@ -46,7 +48,7 @@ def sort_words_by_frequency(text):
 def main():
     """Main function of the program."""
     text = input().strip()
-
+    
     result = sort_words_by_frequency(text)
     print(result)
 
