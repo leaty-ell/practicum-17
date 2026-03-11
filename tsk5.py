@@ -18,7 +18,6 @@ def build_family_tree(n):
         else:
             tree[parent] = [child]
         
-        # Ensure child is in tree (may have no children)
         if child not in tree:
             tree[child] = []
     
