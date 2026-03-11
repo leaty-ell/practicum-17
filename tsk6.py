@@ -53,7 +53,6 @@ def find_shortest_path(graph, start, end):
     distances[start] = 0
     
     for i in range(len(graph)):
-        # Find unvisited city with minimum distance
         min_distance = 999999
         min_city = None
         
