@@ -30,7 +30,7 @@ def build_graph(n, m):
 
 def find_shortest_path(graph, start, end):
     """
-    Finds shortest path using Dijkstra's algorithm.
+    Finds shortest path using.
     
     Arguments:
         graph: city graph
@@ -47,13 +47,13 @@ def find_shortest_path(graph, start, end):
     visited = {}
     
     for city in graph:
-        distances[city] = 999999 
+        distances[city] = float('inf')
         visited[city] = False
     
     distances[start] = 0
     
     for i in range(len(graph)):
-        min_distance = 999999
+        min_distance = float('inf')
         min_city = None
         
         for city in graph:
