@@ -1,40 +1,55 @@
-def process_word_frequencies(text):
+from collections import Counter
+
+
+def get_freq(text):
     """
-    Function processes input text and returns words sorted by frequency.
-    1. Counts the frequency of each word in the text
-    2. Sorts words by frequency in descending order
+    Counts word frequencies and records first occurrence indices.
     
     Arguments:
-        text (str): Input string containing words separated by spaces
+        text: input string with words separated by spaces
     
     Returns:
-        list: List of words sorted by decreasing frequency of occurrence
+        tuple: (Counter of frequencies, dict of first occurrences)
     """
     words = text.split()
-    frequencies = {}
+    freq = Counter(words)
     
-    for word in words:
-        if word in frequencies:
-            frequencies[word] += 1
-        else:
-            frequencies[word] = 1
+    first_occurrence = {}
+    for i, word in enumerate(words):
+        if word not in first_occurrence:
+            first_occurrence[word] = i
     
-    items = list(frequencies.items())
-  
-    n = len(items)
-    for i in range(n):
-        for j in range(0, n - i - 1):
-            if items[j][1] < items[j + 1][1]:
-                items[j], items[j + 1] = items[j + 1], items[j]
+    return freq, first_occurrence
+
+
+def sort_words_by_frequency(text):
+    """
+    Sorts words by frequency in descending order.
+    Words with same frequency keep original order.
     
-    sorted_words = []
-    for word, frequency in items:
-        sorted_words.append(word)
+    Arguments:
+        text: input string with words separated by spaces
     
-    return sorted_words
+    Returns:
+        str: sorted words joined by spaces
+    """
+    freq, first_idx = get_freq(text)
+    
+    sorted_words = sorted(
+        freq.keys(),
+        key=lambda x: (-freq[x], first_idx[x])
+    )
+    
+    return ' '.join(sorted_words)
 
 
 def main():
     """Main function of the program."""
-    print("Enter a string with words:")
-    input_text = input()
+    text = input().strip()
+
+    result = sort_words_by_frequency(text)
+    print(result)
+
+
+if __name__ == "__main__":
+    main()
